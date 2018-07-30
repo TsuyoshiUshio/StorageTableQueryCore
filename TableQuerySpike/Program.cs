@@ -63,5 +63,28 @@ namespace TableQuerySpike
 
 
         }
+
+        public static async Task QueryAsync()
+        {
+            var storageAccount = CloudStorageAccount.Parse(Configuration["ConnectionString"]);
+            var client = storageAccount.CreateCloudTableClient();
+            var instanceTable = client.GetTableReference("DurableFunctionsHubInstances");
+
+            var builder = new OrchestrationInstanceStatusQuerBuilder();
+            builder.AddRuntimeStatus("Completed");
+            builder.AddCreatedDate(new DateTime(2018, 7, 30, 0, 0, 0), new DateTime(2018, 7, 30, 23, 59, 59));
+            var query = builder.Build();
+
+            TableContinuationToken continuationToken = null;
+            do
+            {
+                var request = await instanceTable.ExecuteQuerySegmentedAsync(query, continuationToken);
+                var instances = request.ToList();
+                Console.WriteLine(JsonConvert.SerializeObject(instances));
+
+                continuationToken = request.ContinuationToken;
+
+            } while (continuationToken != null);
+        }
     }
 }
