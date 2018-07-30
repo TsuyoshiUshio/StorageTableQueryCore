@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27729.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TableQuerySpike", "TableQuerySpike\TableQuerySpike.csproj", "{BB3BB410-C704-43CF-B2B7-B83914A20548}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TableQuerySpike.Test", "TableQuerySpike.Test\TableQuerySpike.Test.csproj", "{43926EB4-74F0-48E2-8F27-C898FE08EF09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{BB3BB410-C704-43CF-B2B7-B83914A20548}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB3BB410-C704-43CF-B2B7-B83914A20548}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB3BB410-C704-43CF-B2B7-B83914A20548}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43926EB4-74F0-48E2-8F27-C898FE08EF09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43926EB4-74F0-48E2-8F27-C898FE08EF09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43926EB4-74F0-48E2-8F27-C898FE08EF09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43926EB4-74F0-48E2-8F27-C898FE08EF09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
