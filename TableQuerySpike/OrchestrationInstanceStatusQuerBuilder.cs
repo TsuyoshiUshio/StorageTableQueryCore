@@ -36,10 +36,6 @@ namespace TableQuerySpike
         private string GetConditions()
         {
             var conditions = new List<string>();
-            if (!string.IsNullOrEmpty(this.RuntimeStatus))
-            {
-                conditions.Add(TableQuery.GenerateFilterCondition("RuntimeStatus", QueryComparisons.Equal, this.RuntimeStatus));
-            }
 
             if (default(DateTime) != this.CreatedDateFrom)
             {
@@ -49,6 +45,11 @@ namespace TableQuerySpike
             if (default(DateTime) != this.CreatedDateTo)
             {
                 conditions.Add(TableQuery.GenerateFilterConditionForDate("CreatedDate", QueryComparisons.LessThanOrEqual, new DateTimeOffset(this.CreatedDateTo)));
+            }
+
+            if (!string.IsNullOrEmpty(this.RuntimeStatus))
+            {
+                conditions.Add(TableQuery.GenerateFilterCondition("RuntimeStatus", QueryComparisons.Equal, this.RuntimeStatus));
             }
 
             if (conditions.Count == 1)
