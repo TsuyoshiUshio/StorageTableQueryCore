@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace TableQuerySpike
 {
-    class OrchestrationInstanceStatus : TableEntity
+    public class OrchestrationInstanceStatus : TableEntity
     {
         public string ExecutionId { get; set; }
         public string Name { get; set; }
@@ -48,6 +48,7 @@ namespace TableQuerySpike
             var query = new TableQuery<OrchestrationInstanceStatus>().Where(
                 TableQuery.GenerateFilterCondition("RuntimeStatus", QueryComparisons.Equal, "Running")
             );
+            
             TableContinuationToken continuationToken = null;
             do
             {
