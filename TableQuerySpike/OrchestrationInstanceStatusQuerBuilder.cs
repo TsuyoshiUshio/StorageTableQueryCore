@@ -10,6 +10,8 @@ namespace TableQuerySpike
         private string RuntimeStatus { get; set; }
         private DateTime CreatedTimeFrom { get; set; }
         private DateTime CreatedTimeTo { get; set; }
+        private DateTime LastUpdatedTimeFrom { get; set; }
+        private DateTime LastUpdatedTimeTo { get; set; }
 
         public OrchestrationInstanceStatusQuerBuilder AddRuntimeStatus(string runtimeStatus)
         {
@@ -23,6 +25,15 @@ namespace TableQuerySpike
             this.CreatedTimeTo = createdTimeTo;
             return this;
         }
+
+        public OrchestrationInstanceStatusQuerBuilder AddLastUpdatedTime(DateTime lastUpdatedTimeFrom, DateTime lastUpdatedTimeTo)
+        {
+            this.LastUpdatedTimeFrom = lastUpdatedTimeFrom;
+            this.LastUpdatedTimeTo = lastUpdatedTimeTo;
+            return this;
+        }
+
+
 
         public TableQuery<OrchestrationInstanceStatus> Build()
         {
@@ -45,6 +56,16 @@ namespace TableQuerySpike
             if (default(DateTime) != this.CreatedTimeTo)
             {
                 conditions.Add(TableQuery.GenerateFilterConditionForDate("CreatedTime", QueryComparisons.LessThanOrEqual, new DateTimeOffset(this.CreatedTimeTo)));
+            }
+
+            if (default(DateTime) != this.LastUpdatedTimeFrom)
+            {
+                conditions.Add(TableQuery.GenerateFilterConditionForDate("LastUpdatedTime", QueryComparisons.GreaterThanOrEqual, new DateTimeOffset(this.LastUpdatedTimeFrom)));
+            }
+
+            if (default(DateTime) != this.LastUpdatedTimeTo)
+            {
+                conditions.Add(TableQuery.GenerateFilterConditionForDate("LastUpdatedTime", QueryComparisons.LessThanOrEqual, new DateTimeOffset(this.LastUpdatedTimeTo)));
             }
 
             if (!string.IsNullOrEmpty(this.RuntimeStatus))
@@ -73,6 +94,7 @@ namespace TableQuerySpike
             }
             
         }
+
 
     }
 }

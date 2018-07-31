@@ -54,5 +54,16 @@ namespace TableQuerySpike.Test
             Assert.Equal("((CreatedTime ge datetime'2018-01-10T01:10:10.0000000Z') and (CreatedTime le datetime'2018-01-10T01:10:50.0000000Z')) and (RuntimeStatus eq 'Runnning')", queryBuilder.Build().FilterString);
 
         }
+
+        [Fact]
+        public void Test_OrchestrationInstanceQuery_LastUpdatedTime()
+        {
+            var queryBuilder = new OrchestrationInstanceStatusQuerBuilder();
+            var lastUpdatedTimeFrom = new DateTime(2018, 1, 10, 10, 10, 10);
+            var lastUpdatedTimeTo = new DateTime(2018, 1, 10, 10, 10, 50);
+            queryBuilder.AddLastUpdatedTime(lastUpdatedTimeFrom, lastUpdatedTimeTo);
+            Assert.Equal("(LastUpdatedTime ge datetime'2018-01-10T01:10:10.0000000Z') and (LastUpdatedTime le datetime'2018-01-10T01:10:50.0000000Z')", queryBuilder.Build().FilterString);
+
+        }
     }
 }
