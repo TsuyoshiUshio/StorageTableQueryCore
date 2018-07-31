@@ -72,7 +72,7 @@ namespace TableQuerySpike
 
             var builder = new OrchestrationInstanceStatusQuerBuilder();
             builder.AddRuntimeStatus("Completed");
-            builder.AddCreatedDate(new DateTime(2018, 7, 30, 0, 0, 0), new DateTime(2018, 7, 30, 23, 59, 59));
+            builder.AddCreatedTime(new DateTime(2018, 7, 30, 0, 0, 0), new DateTime(2018, 7, 30, 23, 59, 59));
             var query = builder.Build();
 
             TableContinuationToken continuationToken = null;

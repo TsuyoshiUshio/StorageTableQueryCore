@@ -18,12 +18,12 @@ namespace TableQuerySpike.Test
         public void Test_OrchestrationInstanceQuery_CreatedTime()
         {
             var queryBuilder = new OrchestrationInstanceStatusQuerBuilder();
-            var createdDateFrom =  new DateTime(2018, 1, 10, 10, 10, 10);
-            var createdDateTo = new DateTime(2018, 1, 10, 10, 10, 50);
+            var createdTimeFrom =  new DateTime(2018, 1, 10, 10, 10, 10);
+            var createdTimeTo = new DateTime(2018, 1, 10, 10, 10, 50);
 
-            queryBuilder.AddCreatedDate(createdDateFrom, createdDateTo);
+            queryBuilder.AddCreatedTime(createdTimeFrom, createdTimeTo);
             var result = queryBuilder.Build().FilterString;
-            Assert.Equal("(CreatedDate ge datetime'2018-01-10T01:10:10.0000000Z') and (CreatedDate le datetime'2018-01-10T01:10:50.0000000Z')", queryBuilder.Build().FilterString);
+            Assert.Equal("(CreatedTime ge datetime'2018-01-10T01:10:10.0000000Z') and (CreatedTime le datetime'2018-01-10T01:10:50.0000000Z')", queryBuilder.Build().FilterString);
 
         }
 
@@ -31,14 +31,14 @@ namespace TableQuerySpike.Test
         public void Test_OrchestrationInstanceQuery_CreatedTimeVariations()
         {
             var queryBuilder = new OrchestrationInstanceStatusQuerBuilder();
-            var createdDateFrom = new DateTime(2018, 1, 10, 10, 10, 10);
-            queryBuilder.AddCreatedDate(createdDateFrom, default(DateTime));
-            Assert.Equal("CreatedDate ge datetime'2018-01-10T01:10:10.0000000Z'", queryBuilder.Build().FilterString);
+            var createdTimeFrom = new DateTime(2018, 1, 10, 10, 10, 10);
+            queryBuilder.AddCreatedTime(createdTimeFrom, default(DateTime));
+            Assert.Equal("CreatedTime ge datetime'2018-01-10T01:10:10.0000000Z'", queryBuilder.Build().FilterString);
 
-            var createdDateTo = new DateTime(2018, 1, 10, 10, 10, 50);
+            var createdTimeTo = new DateTime(2018, 1, 10, 10, 10, 50);
 
-            queryBuilder.AddCreatedDate(default(DateTime), createdDateTo);
-            Assert.Equal("CreatedDate le datetime'2018-01-10T01:10:50.0000000Z'", queryBuilder.Build().FilterString);
+            queryBuilder.AddCreatedTime(default(DateTime), createdTimeTo);
+            Assert.Equal("CreatedTime le datetime'2018-01-10T01:10:50.0000000Z'", queryBuilder.Build().FilterString);
         }        
 
         [Fact]
@@ -46,12 +46,12 @@ namespace TableQuerySpike.Test
         {
             var queryBuilder = new OrchestrationInstanceStatusQuerBuilder();
             queryBuilder.AddRuntimeStatus("Runnning");
-            var createdDateFrom = new DateTime(2018, 1, 10, 10, 10, 10);
-            var createdDateTo = new DateTime(2018, 1, 10, 10, 10, 50);
+            var createdTimeFrom = new DateTime(2018, 1, 10, 10, 10, 10);
+            var createdTimeTo = new DateTime(2018, 1, 10, 10, 10, 50);
 
-            queryBuilder.AddCreatedDate(createdDateFrom, createdDateTo);
+            queryBuilder.AddCreatedTime(createdTimeFrom, createdTimeTo);
             var result = queryBuilder.Build().FilterString;
-            Assert.Equal("((CreatedDate ge datetime'2018-01-10T01:10:10.0000000Z') and (CreatedDate le datetime'2018-01-10T01:10:50.0000000Z')) and (RuntimeStatus eq 'Runnning')", queryBuilder.Build().FilterString);
+            Assert.Equal("((CreatedTime ge datetime'2018-01-10T01:10:10.0000000Z') and (CreatedTime le datetime'2018-01-10T01:10:50.0000000Z')) and (RuntimeStatus eq 'Runnning')", queryBuilder.Build().FilterString);
 
         }
     }

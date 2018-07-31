@@ -8,8 +8,8 @@ namespace TableQuerySpike
     public class OrchestrationInstanceStatusQuerBuilder
     {
         private string RuntimeStatus { get; set; }
-        private DateTime CreatedDateFrom { get; set; }
-        private DateTime CreatedDateTo { get; set; }
+        private DateTime CreatedTimeFrom { get; set; }
+        private DateTime CreatedTimeTo { get; set; }
 
         public OrchestrationInstanceStatusQuerBuilder AddRuntimeStatus(string runtimeStatus)
         {
@@ -17,10 +17,10 @@ namespace TableQuerySpike
             return this;
         }
 
-        public OrchestrationInstanceStatusQuerBuilder AddCreatedDate(DateTime createdDateFrom, DateTime createdDateTo)
+        public OrchestrationInstanceStatusQuerBuilder AddCreatedTime(DateTime createdTimeFrom, DateTime createdTimeTo)
         {
-            this.CreatedDateFrom = createdDateFrom;
-            this.CreatedDateTo = createdDateTo;
+            this.CreatedTimeFrom = createdTimeFrom;
+            this.CreatedTimeTo = createdTimeTo;
             return this;
         }
 
@@ -37,14 +37,14 @@ namespace TableQuerySpike
         {
             var conditions = new List<string>();
 
-            if (default(DateTime) != this.CreatedDateFrom)
+            if (default(DateTime) != this.CreatedTimeFrom)
             {
-                conditions.Add(TableQuery.GenerateFilterConditionForDate("CreatedDate", QueryComparisons.GreaterThanOrEqual, new DateTimeOffset(this.CreatedDateFrom)));
+                conditions.Add(TableQuery.GenerateFilterConditionForDate("CreatedTime", QueryComparisons.GreaterThanOrEqual, new DateTimeOffset(this.CreatedTimeFrom)));
             }
 
-            if (default(DateTime) != this.CreatedDateTo)
+            if (default(DateTime) != this.CreatedTimeTo)
             {
-                conditions.Add(TableQuery.GenerateFilterConditionForDate("CreatedDate", QueryComparisons.LessThanOrEqual, new DateTimeOffset(this.CreatedDateTo)));
+                conditions.Add(TableQuery.GenerateFilterConditionForDate("CreatedTime", QueryComparisons.LessThanOrEqual, new DateTimeOffset(this.CreatedTimeTo)));
             }
 
             if (!string.IsNullOrEmpty(this.RuntimeStatus))
