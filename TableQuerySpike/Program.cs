@@ -95,8 +95,8 @@ namespace TableQuerySpike
             var instanceTable = client.GetTableReference("DurableFunctionsHubInstances");
 
             var builder = new OrchestrationInstanceStatusQueryBuilder();
-            builder.AddRuntimeStatus("Completed");
-            builder.AddCreatedTime(new DateTime(2018, 7, 30, 0, 0, 0, DateTimeKind.Utc), new DateTime(2018, 7, 30, 23, 59, 59, DateTimeKind.Utc));
+            builder.AddRuntimeStatus("Completed")
+                   .AddCreatedTime(new DateTime(2018, 7, 30, 0, 0, 0, DateTimeKind.Utc), new DateTime(2018, 7, 30, 23, 59, 59, DateTimeKind.Utc));
             var query = builder.Build();
 
             TableContinuationToken continuationToken = null;
