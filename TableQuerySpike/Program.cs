@@ -35,12 +35,34 @@ namespace TableQuerySpike
             Configuration = builder.Build();
             Console.WriteLine("Strat Query....");
             // ExecuteAsync().GetAwaiter().GetResult();
-            QueryAsync().GetAwaiter().GetResult();
+            // QueryAsync().GetAwaiter().GetResult();
+            RetriveAllAsync().GetAwaiter().GetResult();
             Console.WriteLine("Done");
             Console.ReadLine();
         }
 
         private static IConfigurationRoot Configuration { get; set; }
+
+        // Confilm if the where clause is null then, retrive all. 
+        public static async Task RetriveAllAsync()
+        {
+            var storageAccount = CloudStorageAccount.Parse(Configuration["ConnectionString"]);
+            var client = storageAccount.CreateCloudTableClient();
+            var instanceTable = client.GetTableReference("DurableFunctionsHubInstances");
+            var builder = new OrchestrationInstanceStatusQueryBuilder();
+            var query = builder.Build();
+
+            TableContinuationToken continuationToken = null;
+            do
+            {
+                var request = await instanceTable.ExecuteQuerySegmentedAsync(query, continuationToken);
+                var instances = request.ToList();
+                Console.WriteLine(JsonConvert.SerializeObject(instances));
+
+                continuationToken = request.ContinuationToken;
+
+            } while (continuationToken != null);
+        }
 
         public static async Task ExecuteAsync()
         {
@@ -72,7 +94,7 @@ namespace TableQuerySpike
             var client = storageAccount.CreateCloudTableClient();
             var instanceTable = client.GetTableReference("DurableFunctionsHubInstances");
 
-            var builder = new OrchestrationInstanceStatusQuerBuilder();
+            var builder = new OrchestrationInstanceStatusQueryBuilder();
             builder.AddRuntimeStatus("Completed");
             builder.AddCreatedTime(new DateTime(2018, 7, 30, 0, 0, 0, DateTimeKind.Utc), new DateTime(2018, 7, 30, 23, 59, 59, DateTimeKind.Utc));
             var query = builder.Build();

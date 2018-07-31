@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TableQuerySpike
 {
-    public class OrchestrationInstanceStatusQuerBuilder
+    public class OrchestrationInstanceStatusQueryBuilder
     {
         private string RuntimeStatus { get; set; }
         private DateTime CreatedTimeFrom { get; set; }
@@ -13,20 +13,20 @@ namespace TableQuerySpike
         private DateTime LastUpdatedTimeFrom { get; set; }
         private DateTime LastUpdatedTimeTo { get; set; }
 
-        public OrchestrationInstanceStatusQuerBuilder AddRuntimeStatus(string runtimeStatus)
+        public OrchestrationInstanceStatusQueryBuilder AddRuntimeStatus(string runtimeStatus)
         {
             this.RuntimeStatus = runtimeStatus;
             return this;
         }
 
-        public OrchestrationInstanceStatusQuerBuilder AddCreatedTime(DateTime createdTimeFrom, DateTime createdTimeTo)
+        public OrchestrationInstanceStatusQueryBuilder AddCreatedTime(DateTime createdTimeFrom, DateTime createdTimeTo)
         {
             this.CreatedTimeFrom = createdTimeFrom;
             this.CreatedTimeTo = createdTimeTo;
             return this;
         }
 
-        public OrchestrationInstanceStatusQuerBuilder AddLastUpdatedTime(DateTime lastUpdatedTimeFrom, DateTime lastUpdatedTimeTo)
+        public OrchestrationInstanceStatusQueryBuilder AddLastUpdatedTime(DateTime lastUpdatedTimeFrom, DateTime lastUpdatedTimeTo)
         {
             this.LastUpdatedTimeFrom = lastUpdatedTimeFrom;
             this.LastUpdatedTimeTo = lastUpdatedTimeTo;

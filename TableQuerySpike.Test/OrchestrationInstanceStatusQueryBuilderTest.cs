@@ -8,7 +8,7 @@ namespace TableQuerySpike.Test
         [Fact]
         public void Test_OrchestrationInstanceQuery_RuntimeStatus()
         {
-            var queryBuilder = new OrchestrationInstanceStatusQuerBuilder();
+            var queryBuilder = new OrchestrationInstanceStatusQueryBuilder();
             queryBuilder.AddRuntimeStatus("Runnning");
             var query = queryBuilder.Build();
             Assert.Equal("RuntimeStatus eq 'Runnning'", query.FilterString);
@@ -17,7 +17,7 @@ namespace TableQuerySpike.Test
         [Fact]
         public void Test_OrchestrationInstanceQuery_CreatedTime()
         {
-            var queryBuilder = new OrchestrationInstanceStatusQuerBuilder();
+            var queryBuilder = new OrchestrationInstanceStatusQueryBuilder();
             var createdTimeFrom =  new DateTime(2018, 1, 10, 10, 10, 10);
             var createdTimeTo = new DateTime(2018, 1, 10, 10, 10, 50);
 
@@ -30,7 +30,7 @@ namespace TableQuerySpike.Test
         [Fact]
         public void Test_OrchestrationInstanceQuery_CreatedTimeVariations()
         {
-            var queryBuilder = new OrchestrationInstanceStatusQuerBuilder();
+            var queryBuilder = new OrchestrationInstanceStatusQueryBuilder();
             var createdTimeFrom = new DateTime(2018, 1, 10, 10, 10, 10);
             queryBuilder.AddCreatedTime(createdTimeFrom, default(DateTime));
             Assert.Equal("CreatedTime ge datetime'2018-01-10T01:10:10.0000000Z'", queryBuilder.Build().FilterString);
@@ -44,7 +44,7 @@ namespace TableQuerySpike.Test
         [Fact]
         public void Test_OrchestrationInstanceQuery_Combination()
         {
-            var queryBuilder = new OrchestrationInstanceStatusQuerBuilder();
+            var queryBuilder = new OrchestrationInstanceStatusQueryBuilder();
             queryBuilder.AddRuntimeStatus("Runnning");
             var createdTimeFrom = new DateTime(2018, 1, 10, 10, 10, 10);
             var createdTimeTo = new DateTime(2018, 1, 10, 10, 10, 50);
@@ -58,7 +58,7 @@ namespace TableQuerySpike.Test
         [Fact]
         public void Test_OrchestrationInstanceQuery_LastUpdatedTime()
         {
-            var queryBuilder = new OrchestrationInstanceStatusQuerBuilder();
+            var queryBuilder = new OrchestrationInstanceStatusQueryBuilder();
             var lastUpdatedTimeFrom = new DateTime(2018, 1, 10, 10, 10, 10);
             var lastUpdatedTimeTo = new DateTime(2018, 1, 10, 10, 10, 50);
             queryBuilder.AddLastUpdatedTime(lastUpdatedTimeFrom, lastUpdatedTimeTo);
