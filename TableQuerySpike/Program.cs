@@ -33,7 +33,9 @@ namespace TableQuerySpike
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json");
             Configuration = builder.Build();
-            ExecuteAsync().GetAwaiter().GetResult();
+            Console.WriteLine("Strat Query....");
+            // ExecuteAsync().GetAwaiter().GetResult();
+            QueryAsync().GetAwaiter().GetResult();
             Console.WriteLine("Done");
             Console.ReadLine();
         }
@@ -72,7 +74,7 @@ namespace TableQuerySpike
 
             var builder = new OrchestrationInstanceStatusQuerBuilder();
             builder.AddRuntimeStatus("Completed");
-            builder.AddCreatedTime(new DateTime(2018, 7, 30, 0, 0, 0), new DateTime(2018, 7, 30, 23, 59, 59));
+            builder.AddCreatedTime(new DateTime(2018, 7, 30, 0, 0, 0, DateTimeKind.Utc), new DateTime(2018, 7, 30, 23, 59, 59, DateTimeKind.Utc));
             var query = builder.Build();
 
             TableContinuationToken continuationToken = null;
